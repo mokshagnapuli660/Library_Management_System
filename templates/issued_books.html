@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Issued Books{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <h2>📋 Issued Books</h2>
+
+    <a href="/issue_book" class="btn btn-primary">
+        📖 Issue New Book
+    </a>
+
+</div>
+
+<table class="table table-bordered table-hover shadow">
+
+    <thead class="table-dark">
+
+        <tr>
+            <th>ID</th>
+            <th>Student</th>
+            <th>Book</th>
+            <th>Issue Date</th>
+            <th>Action</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+    {% for item in issued %}
+
+    <tr>
+
+        <td>{{ item[0] }}</td>
+        <td>{{ item[1] }}</td>
+        <td>{{ item[2] }}</td>
+        <td>{{ item[3] }}</td>
+
+        <td>
+
+            <a href="/return_book/{{ item[0] }}"
+               class="btn btn-success btn-sm"
+               onclick="return confirm('Return this book?')">
+
+                Return
+
+            </a>
+
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}

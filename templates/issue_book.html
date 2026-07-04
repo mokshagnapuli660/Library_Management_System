@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Issue Book{% endblock %}
+
+{% block content %}
+
+<div class="card shadow">
+
+    <div class="card-header bg-primary text-white">
+        <h3>📖 Issue Book</h3>
+    </div>
+
+    <div class="card-body">
+
+        <form action="/save_issue" method="POST">
+
+            <div class="mb-3">
+                <label class="form-label">Student</label>
+
+                <select name="student_id" class="form-select" required>
+
+                    <option value="">Select Student</option>
+
+                    {% for student in students %}
+                    <option value="{{ student[0] }}">
+                        {{ student[1] }}
+                    </option>
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Book</label>
+
+                <select name="book_id" class="form-select" required>
+
+                    <option value="">Select Book</option>
+
+                    {% for book in books %}
+                    <option value="{{ book[0] }}">
+                        {{ book[1] }}
+                    </option>
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Issue Date</label>
+
+                <input
+                    type="date"
+                    name="issue_date"
+                    class="form-control"
+                    required>
+
+            </div>
+
+            <button class="btn btn-success">
+                📖 Issue Book
+            </button>
+
+            <a href="/issued_books" class="btn btn-secondary">
+                Cancel
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

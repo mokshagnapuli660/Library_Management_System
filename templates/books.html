@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Books{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <h2>📚 Books Management</h2>
+
+    <a href="/add_book" class="btn btn-primary">
+        ➕ Add Book
+    </a>
+
+</div>
+
+<form method="GET" action="/books" class="mb-4">
+
+    <div class="input-group">
+
+        <input
+            type="text"
+            name="search"
+            class="form-control"
+            placeholder="Search by book title..."
+            value="{{ request.args.get('search', '') }}"
+        >
+
+        <button class="btn btn-success">
+            Search
+        </button>
+
+    </div>
+
+</form>
+
+<table class="table table-bordered table-hover shadow">
+
+    <thead class="table-dark">
+
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Category</th>
+            <th width="180">Action</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+    {% for book in books %}
+
+    <tr>
+
+        <td>{{ book[0] }}</td>
+        <td>{{ book[1] }}</td>
+        <td>{{ book[2] }}</td>
+        <td>{{ book[3] }}</td>
+
+        <td>
+
+            <a href="/edit_book/{{ book[0] }}"
+               class="btn btn-warning btn-sm">
+                Edit
+            </a>
+
+            <a href="/delete_book/{{ book[0] }}"
+               class="btn btn-danger btn-sm"
+               onclick="return confirm('Delete this book?')">
+                Delete
+            </a>
+
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}
